@@ -7,21 +7,21 @@ INSERT INTO ROL (Nombre_Rol, Descripcion) VALUES
 ('OPERADOR', 'Operador de centro de acopio y recepcion'),
 ('GENERADOR', 'Ciudadano o empresa que entrega RAEE');
 
--- 2. Insertar OrganizaciÛn de prueba
+-- 2. Insertar Organizaci√≥n de prueba
 INSERT INTO ORGANIZACION (Nombre, Tipo_Organizacion, Direccion) VALUES 
 ('Recicladora Quito S.A.', 'Empresa Privada', 'Av. Amazonas y Naciones Unidas');
 
--- 3. Insertar Usuarios de prueba (contraseÒa genÈrica en hash simulado)
+-- 3. Insertar Usuarios de prueba (contrase√±a gen√©rica en hash simulado)
 INSERT INTO USUARIO (Id_Organizacion, Id_Rol, Nombre, Email, Hash_Password, Estado) VALUES 
 (1, 1, 'Admin Principal', 'admin@ecoraee.com', 'hash_seguro_123', 'ACTIVO'),
 (1, 2, 'Carlos Operador', 'operador@ecoraee.com', 'hash_seguro_123', 'ACTIVO'),
 (1, 3, 'Maria Generador', 'generador@ecoraee.com', 'hash_seguro_123', 'ACTIVO');
 
--- 4. Insertar CategorÌas RAEE
+-- 4. Insertar Categor√≠as RAEE
 INSERT INTO CATEGORIA_RAEE (Codigo, Nombre_Categoria, Descripcion) VALUES 
-('CAT-01', 'LÌnea Blanca', 'Refrigeradores, lavadoras, cocinas'),
-('CAT-02', 'Inform·tica y Comunicaciones', 'Computadoras, laptops, impresoras, telÈfonos'),
-('CAT-03', 'PequeÒos ElectrodomÈsticos', 'Licuadoras, microondas, planchas');
+('CAT-01', 'L√≠nea Blanca', 'Refrigeradores, lavadoras, cocinas'),
+('CAT-02', 'Inform√°tica y Comunicaciones', 'Computadoras, laptops, impresoras, tel√©fonos'),
+('CAT-03', 'Peque√±os Electrodom√©sticos', 'Licuadoras, microondas, planchas');
 
 -- 5. Insertar Centro de Acopio
 INSERT INTO CENTRO_ACOPIO (Id_Organizacion, Nombre, Direccion, Capacidad_Max_Kg, Estado) VALUES 
@@ -29,4 +29,4 @@ INSERT INTO CENTRO_ACOPIO (Id_Organizacion, Nombre, Direccion, Capacidad_Max_Kg,
 
 -- 6. Insertar un Destino Final base (para cuando se procesen)
 INSERT INTO DESTINO_FINAL (Tipo_Destino, Descripcion, Certificado) VALUES 
-('RECICLAJE', 'Proceso de separaciÛn de metales y pl·sticos', 'CERT-2026-001');
+('RECICLAJE', 'Proceso de separaci√≥n de metales y pl√°sticos', 'CERT-2026-001');
