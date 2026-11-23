@@ -16,6 +16,7 @@ router = crear_router(
     Recoleccion,
     RecoleccionIn,
     RecoleccionOut,
+    lectura=("ADMINISTRADOR", "TECNICO"),
     relaciones={"center_id": CentroAcopio},
     despues=marcar_recolectados,
 )

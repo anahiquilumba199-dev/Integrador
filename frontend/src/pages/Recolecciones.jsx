@@ -1,24 +1,17 @@
-
+import { useCollection } from "../services/useCollection";
 import { useState } from "react";
 import { Plus } from "lucide-react";
 
 function Recolecciones() {
-  const [requests, setRequests] = useState([
-    { id: 1, applicant: "Laboratorio de sistemas", date: "2026-10-20", state: "PENDIENTE" },
-    { id: 2, applicant: "Área administrativa", date: "2026-10-22", state: "APROBADA" }
-  ]);
+  const { items: requests, error, create } = useCollection("/recolecciones");
 
   const [showForm, setShowForm] = useState(false);
   const [applicant, setApplicant] = useState("");
   const [date, setDate] = useState("");
 
-  function addRequest(e) {
+  async function addRequest(e) {
     e.preventDefault();
-
-    setRequests([
-      ...requests,
-      { id: Date.now(), applicant, date, state: "PENDIENTE" }
-    ]);
+    if (!(await create({ applicant, date }))) return;
 
     setApplicant("");
     setDate("");
@@ -27,6 +20,7 @@ function Recolecciones() {
 
   return (
     <section className="dashboard">
+      {error && <p role="alert">{error}</p>}
       <div className="page-heading">
         <div>
           <h1>Recolecciones</h1>

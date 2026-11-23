@@ -1,24 +1,18 @@
-
+import { useCollection } from "../services/useCollection";
 import { useState } from "react";
 import { ClipboardCheck } from "lucide-react";
 
 function Evaluaciones() {
-  const [evaluations, setEvaluations] = useState([
-    { id: 1, device: "Computadora de escritorio", result: "REACONDICIONAMIENTO", date: "2026-10-20" },
-    { id: 2, device: "Monitor LED", result: "RECICLAJE", date: "2026-10-22" }
-  ]);
+  const { items: evaluations, error, create } = useCollection("/evaluaciones");
 
+  const { items: dispositivos, error: errorDispositivos } = useCollection("/dispositivos");
   const [device, setDevice] = useState("");
   const [result, setResult] = useState("REACONDICIONAMIENTO");
   const [date, setDate] = useState("");
 
-  function addEvaluation(e) {
+  async function addEvaluation(e) {
     e.preventDefault();
-
-    setEvaluations([
-      ...evaluations,
-      { id: Date.now(), device, result, date }
-    ]);
+    if (!(await create({ device_id: Number(device), result, date }))) return;
 
     setDevice("");
     setDate("");
@@ -26,6 +20,7 @@ function Evaluaciones() {
 
   return (
     <section className="dashboard">
+      {(error || errorDispositivos) && <p role="alert">{error || errorDispositivos}</p>}
       <div className="page-heading">
         <div>
           <h1>Evaluaciones técnicas</h1>
@@ -35,7 +30,14 @@ function Evaluaciones() {
 
       <form className="content-card form-grid" onSubmit={addEvaluation}>
         <h3><ClipboardCheck size={20} /> Nueva evaluación</h3>
-        <label>Dispositivo<input value={device} onChange={(e) => setDevice(e.target.value)} required /></label>
+        <label>Dispositivo
+          <select value={device} onChange={(e) => setDevice(e.target.value)} required>
+            <option value="">Seleccionar dispositivo</option>
+            {dispositivos.map((item) => (
+              <option key={item.id} value={item.id}>{item.name} (#{item.id})</option>
+            ))}
+          </select>
+        </label>
         <label>Resultado
           <select value={result} onChange={(e) => setResult(e.target.value)}>
             <option value="REACONDICIONAMIENTO">Reacondicionamiento</option>

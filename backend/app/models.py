@@ -1,7 +1,7 @@
 import datetime as dt
 from typing import get_args
 
-from sqlalchemy import CheckConstraint, Date, ForeignKey, String
+from sqlalchemy import CheckConstraint, Date, DateTime, ForeignKey, String, Unicode
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .database import Base
@@ -21,6 +21,7 @@ class Usuario(Base):
     name: Mapped[str] = mapped_column(String(100))
     email: Mapped[str] = mapped_column(String(120), unique=True)
     password_hash: Mapped[str] = mapped_column(String(255))
+    active: Mapped[bool] = mapped_column(default=True)
     role: Mapped[str] = mapped_column(String(20), default="TECNICO")
 
 
@@ -96,3 +97,18 @@ class Evaluacion(Base):
     @property
     def device(self) -> str:
         return self.dispositivo.name
+
+
+
+class RegistroAuditoria(Base):
+    __tablename__ = "registros_auditoria"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    usuario: Mapped[str] = mapped_column(Unicode(100))
+    rol: Mapped[str] = mapped_column(String(20))
+    accion: Mapped[str] = mapped_column(Unicode(40))
+    modulo: Mapped[str] = mapped_column(Unicode(40))
+    descripcion: Mapped[str] = mapped_column(Unicode(200))
+    fecha: Mapped[dt.datetime] = mapped_column(
+        DateTime, default=lambda: dt.datetime.now(dt.timezone.utc).replace(tzinfo=None)
+    )
