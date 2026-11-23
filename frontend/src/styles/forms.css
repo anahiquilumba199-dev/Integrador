@@ -1,0 +1,524 @@
+/* FORMULARIOS GENERALES */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 17px;
+  margin-bottom: 22px;
+}
+
+.form-grid h3 {
+  grid-column: 1 / -1;
+}
+
+.form-grid label,
+.login-card label,
+.treatment-form-field,
+.operation-form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.form-grid input,
+.form-grid select,
+.form-grid textarea,
+.login-card input,
+.operation-form-grid input,
+.treatment-form-field input,
+.treatment-form-field select,
+.treatment-form-field textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  background: white;
+  color: var(--text);
+  font-size: 13px;
+}
+
+.form-grid input:focus,
+.form-grid select:focus,
+.form-grid textarea:focus,
+.login-card input:focus,
+.operation-form-grid input:focus,
+.treatment-form-field input:focus,
+.treatment-form-field select:focus,
+.treatment-form-field textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(36, 118, 185, .09);
+}
+
+.form-grid button {
+  justify-self: start;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.user-error,
+.login-error {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border: 1px solid #f3b4b4;
+  border-radius: 8px;
+  background: var(--danger-light);
+  color: var(--danger);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* LOGIN */
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #eaf3fb, #d8e9f7);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 410px;
+  padding: 38px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: white;
+  box-shadow: var(--shadow-lg);
+}
+
+.login-logo {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.login-card h1 {
+  color: var(--navy);
+  font-size: 25px;
+  text-align: center;
+}
+
+.login-card > p {
+  margin-bottom: 15px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.login-subtitle {
+  margin: 5px 0 8px;
+  color: var(--navy);
+  font-size: 17px;
+  text-align: center;
+}
+
+.login-input-container,
+.user-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  color: var(--text-muted);
+}
+
+.login-input-container:focus-within,
+.user-input:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(36, 118, 185, .09);
+}
+
+.login-input-container input,
+.user-input input,
+.user-input select {
+  width: 100%;
+  min-width: 0;
+  padding: 12px 10px;
+  border: none;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.login-input-container input:focus,
+.user-input input:focus,
+.user-input select:focus {
+  border: none;
+  box-shadow: none;
+}
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  padding-right: 45px;
+}
+
+.password-container button,
+.password-input button {
+  position: absolute;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.password-container button:hover,
+.password-input button:hover {
+  color: var(--primary);
+}
+
+.login-button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 13px;
+  font-size: 13px;
+}
+
+.login-info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.login-info svg {
+  flex-shrink: 0;
+}
+
+.login-card footer {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.login-card footer p {
+  margin-bottom: 5px;
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.login-card footer span {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+/* GESTIÓN DE USUARIOS */
+
+.user-form {
+  margin-bottom: 22px;
+}
+
+.form-heading,
+.users-table-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.form-heading h3,
+.users-table-heading h3 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 7px;
+  color: var(--navy);
+  font-size: 17px;
+}
+
+.form-heading p,
+.users-table-heading p {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.user-form .form-grid {
+  margin-bottom: 20px;
+}
+
+.user-form .form-grid label {
+  min-width: 0;
+}
+
+.password-input {
+  padding-right: 10px;
+}
+
+.password-input button {
+  position: static;
+  padding: 4px;
+}
+
+.password-help {
+  display: block;
+  color: var(--text-muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+/* CREDENCIALES */
+
+.credentials-card {
+  margin-bottom: 22px;
+  border: 1px solid #b7d8ef;
+  background: #f3f9fe;
+}
+
+.credentials-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.credentials-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--primary);
+}
+
+.credentials-title h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.credentials-card > p {
+  margin-bottom: 18px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.credentials-data {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.credentials-data div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 13px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+}
+
+.credentials-data span {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.credentials-data strong {
+  color: var(--text);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+/* MODALES COMPARTIDOS */
+
+.operation-modal-overlay,
+.request-modal-overlay,
+.treatment-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(16, 42, 67, .58);
+  backdrop-filter: blur(3px);
+}
+
+.operation-modal,
+.request-modal,
+.treatment-modal {
+  width: 100%;
+  max-height: 92vh;
+  overflow-y: auto;
+  border-radius: 15px;
+  background: white;
+  box-shadow: var(--shadow-lg);
+}
+
+.operation-modal {
+  max-width: 600px;
+  padding: 25px;
+}
+
+.operation-modal-header,
+.request-modal-header,
+.treatment-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 22px 25px;
+  border-bottom: 1px solid var(--border);
+}
+
+.operation-modal-header h2 {
+  margin-bottom: 6px;
+  color: var(--navy);
+  font-size: 20px;
+}
+
+.operation-modal-header p,
+.request-modal-header span,
+.treatment-modal-header span {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.operation-form-grid,
+.treatment-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.operation-form-grid label span,
+.treatment-form-field label {
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.operation-form-grid input {
+  padding: 11px 12px;
+}
+
+.operation-form-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 22px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--primary-light);
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.operation-modal-actions,
+.request-modal-footer,
+.treatment-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.request-modal-footer,
+.treatment-modal-footer {
+  padding: 18px 25px;
+  border-top: 1px solid var(--border);
+}
+
+.operation-modal-actions button,
+.request-modal-footer button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* RESPONSIVE DE FORMULARIOS */
+
+@media (max-width: 700px) {
+  .form-grid,
+  .credentials-data {
+    grid-template-columns: 1fr;
+  }
+
+  .login-card {
+    padding: 28px 23px;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .form-actions button {
+    width: 100%;
+  }
+
+  .users-table-heading,
+  .form-heading {
+    align-items: flex-start;
+  }
+
+  .operation-form-grid,
+  .treatment-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .operation-modal-actions,
+  .request-modal-footer,
+  .treatment-modal-footer {
+    flex-direction: column;
+  }
+
+  .operation-modal-actions button,
+  .request-modal-footer button,
+  .treatment-modal-footer button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .login-card {
+    padding: 24px 18px;
+  }
+}

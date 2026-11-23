@@ -1,33 +1,24 @@
 
-import {
-  LayoutDashboard,
-  Monitor,
-  Building2,
-  Truck,
-  Package,
-  ClipboardCheck,
-  Users,
-  Recycle
-} from "lucide-react";
-
 import { NavLink } from "react-router-dom";
+import { Recycle } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
+import { MENU_BY_ROLE } from "../config/permissions";
 
 function Sidebar() {
-  const menuItems = [
-    { name: "Panel principal", path: "/dashboard", icon: LayoutDashboard },
-    { name: "Dispositivos", path: "/dispositivos", icon: Monitor },
-    { name: "Centros de acopio", path: "/centros", icon: Building2 },
-    { name: "Recolecciones", path: "/recolecciones", icon: Truck },
-    { name: "Inventario", path: "/inventario", icon: Package },
-    { name: "Evaluaciones", path: "/evaluaciones", icon: ClipboardCheck },
-    { name: "Usuarios", path: "/usuarios", icon: Users }
-  ];
+  const { usuario } = useAuth();
+
+  const menuItems = MENU_BY_ROLE[usuario?.rol] || [];
 
   return (
     <aside className="sidebar">
       <div className="logo">
-        <Recycle size={27} />
-        <span>EcoRAEE</span> Cloud
+        <div className="logo-icon">
+          <Recycle size={27} />
+        </div>
+
+        <div className="logo-text">
+          <span>EcoRAEE</span> Cloud
+        </div>
       </div>
 
       <p className="sidebar-description">
@@ -44,7 +35,9 @@ function Sidebar() {
             <NavLink
               key={item.path}
               to={item.path}
-              className={({ isActive }) => isActive ? "active" : ""}
+              className={({ isActive }) =>
+                isActive ? "active" : ""
+              }
             >
               <Icon size={19} />
               <span>{item.name}</span>
