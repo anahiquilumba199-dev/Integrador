@@ -1,25 +1,20 @@
-
+import { useAuth } from "../context/useAuth";
+import { useCollection } from "../services/useCollection";
 import { useState } from "react";
 import { Plus, Building2 } from "lucide-react";
 
 function CentrosAcopio() {
-  const [centers, setCenters] = useState([
-    { id: 1, name: "Centro de Acopio Principal", location: "Edificio administrativo", capacity: "500 kg" },
-    { id: 2, name: "Centro de Acopio Secundario", location: "Laboratorio de sistemas", capacity: "250 kg" }
-  ]);
+  const { usuario } = useAuth();
+  const { items: centers, error, create } = useCollection("/centros");
 
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [capacity, setCapacity] = useState("");
 
-  function addCenter(e) {
+  async function addCenter(e) {
     e.preventDefault();
-
-    setCenters([
-      ...centers,
-      { id: Date.now(), name, location, capacity: `${capacity} kg` }
-    ]);
+    if (!(await create({ name, location, capacity: Number(capacity) }))) return;
 
     setName("");
     setLocation("");
@@ -29,14 +24,15 @@ function CentrosAcopio() {
 
   return (
     <section className="dashboard">
+      {error && <p role="alert">{error}</p>}
       <div className="page-heading">
         <div>
           <h1>Centros de acopio</h1>
           <p>Administración de los lugares de recepción de RAEE.</p>
         </div>
-        <button className="primary-button" onClick={() => setShowForm(!showForm)}>
+        {usuario.rol === "ADMINISTRADOR" && <button className="primary-button" onClick={() => setShowForm(!showForm)}>
           <Plus size={18} /> Nuevo centro
-        </button>
+        </button>}
       </div>
 
       {showForm && (
@@ -55,7 +51,7 @@ function CentrosAcopio() {
             <Building2 size={28} />
             <h3>{center.name}</h3>
             <p>Ubicación: {center.location}</p>
-            <p>Capacidad: {center.capacity}</p>
+            <p>Capacidad: {center.capacity} kg</p>
           </article>
         ))}
       </div>

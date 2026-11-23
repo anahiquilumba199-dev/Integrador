@@ -1,26 +1,34 @@
 
-import { Bell, Search } from "lucide-react";
+import { useAuth } from "../context/useAuth";
+import { ROLE_LABELS } from "../config/permissions";
+import { LogOut, UserCircle } from "lucide-react";
 
 function Navbar() {
+  const { usuario, logout } = useAuth();
+
+  const nombre = usuario?.nombre || usuario?.email || "Usuario";
+  const rol = usuario?.rol;
+
   return (
-    <header className="topbar">
-      <div className="topbar-search">
-        <Search size={18} />
-        <input type="text" placeholder="Buscar..." />
-      </div>
-
-      <div className="topbar-actions">
-        <button className="notification-button" aria-label="Notificaciones">
-          <Bell size={20} />
-        </button>
-
-        <div className="user-info">
-          <div className="user-avatar">M</div>
-          <div>
-            <strong>Administrador</strong>
-            <small>Gestión del sistema</small>
-          </div>
+    <header className="navbar">
+      <div className="navbar-user">
+        <div className="navbar-avatar">
+          <UserCircle size={25} />
         </div>
+
+        <div className="navbar-user-info">
+          <strong>{nombre}</strong>
+          <span>{ROLE_LABELS[rol] || "Usuario"}</span>
+        </div>
+
+        <button
+          type="button"
+          className="logout-button"
+          onClick={logout}
+        >
+          <LogOut size={17} />
+          Cerrar sesión
+        </button>
       </div>
     </header>
   );

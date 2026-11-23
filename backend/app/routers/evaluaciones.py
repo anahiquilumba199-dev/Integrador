@@ -13,6 +13,7 @@ router = crear_router(
     Evaluacion,
     EvaluacionIn,
     EvaluacionOut,
+    lectura=("ADMINISTRADOR", "TECNICO"),
     relaciones={"evaluator_id": Usuario},
     preparar=lambda db, datos: resolver_dispositivo(db, datos),
     despues=marcar_evaluado,

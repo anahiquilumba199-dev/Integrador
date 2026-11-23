@@ -1,15 +1,13 @@
+import { useCollection } from "../services/useCollection";
 
 import { Package } from "lucide-react";
 
 function Inventario() {
-  const inventory = [
-    { id: 1, device: "Computadora de escritorio", quantity: 15, condition: "Pendiente de evaluación" },
-    { id: 2, device: "Monitores", quantity: 22, condition: "Almacenado" },
-    { id: 3, device: "Impresoras", quantity: 8, condition: "Almacenado" }
-  ];
+  const { items: inventory, error } = useCollection("/inventario");
 
   return (
     <section className="dashboard">
+      {error && <p role="alert">{error}</p>}
       <div className="page-heading">
         <div>
           <h1>Inventario</h1>

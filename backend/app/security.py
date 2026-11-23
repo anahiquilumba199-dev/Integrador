@@ -15,5 +15,8 @@ def hash_password(password: str) -> str:
 
 
 def verificar_password(password: str, guardado: str) -> bool:
-    salt, digest = guardado.split("$")
-    return hmac.compare_digest(_derivar(password, bytes.fromhex(salt)), digest)
+    try:
+        salt, digest = guardado.split("$")
+        return hmac.compare_digest(_derivar(password, bytes.fromhex(salt)), digest)
+    except (TypeError, ValueError):
+        return False
